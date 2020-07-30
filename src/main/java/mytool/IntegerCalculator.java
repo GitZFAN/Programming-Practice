@@ -1,7 +1,7 @@
 package mytool;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.LinkedList;
 
 /**
  * @author TheFan
@@ -9,10 +9,10 @@ import java.util.Stack;
 public class IntegerCalculator {
 
     /**
-     * 将字符串转化成List
+     * 将输入字符串格式原始计算表达式转化成List格式计算表达式
      *
-     * @param str
-     * @return
+     * @param str 原始计算表达式
+     * @return 处理后的list格式计算表达式，每个元素表示一个数字或操作符
      */
     public ArrayList<String> getStringList(String str) {
         ArrayList<String> result = new ArrayList<>();
@@ -41,13 +41,13 @@ public class IntegerCalculator {
     /**
      * 将中缀表达式转化为后缀表达式
      *
-     * @param inOrderList
-     * @return
+     * @param inOrderList 中缀表达式
+     * @return 后缀表达式
      */
     public ArrayList<String> getPostOrder(ArrayList<String> inOrderList) {
-
         ArrayList<String> result = new ArrayList<>();
-        Stack<String> stack = new Stack<>();
+
+        LinkedList<String> stack = new LinkedList<>();
         for (String s : inOrderList) {
             if (Character.isDigit(s.charAt(0))) {
                 result.add(s);
@@ -80,11 +80,11 @@ public class IntegerCalculator {
     /**
      * 计算后缀表达式
      *
-     * @param postOrder
-     * @return
+     * @param postOrder 后缀表达式
+     * @return 表达式的结果
      */
     public Integer calculate(ArrayList<String> postOrder) {
-        Stack<Integer> stack = new Stack<>();
+        LinkedList<Integer> stack = new LinkedList<>();
         for (String s : postOrder) {
             if (Character.isDigit(s.charAt(0))) {
                 stack.push(Integer.valueOf(s));
@@ -117,9 +117,9 @@ public class IntegerCalculator {
     /**
      * 比较运算符等级
      *
-     * @param peek
-     * @param cur
-     * @return
+     * @param peek 栈顶的运算符
+     * @param cur  新遇到的运算符
+     * @return true if peek 的优先级高于 cur，otherwise return false.
      */
     public static boolean compare(String peek, String cur) {
         if ("*".equals(peek) && ("/".equals(cur) || "*".equals(cur) || "+".equals(cur) || "-".equals(cur))) {
