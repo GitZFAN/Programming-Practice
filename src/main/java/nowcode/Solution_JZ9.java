@@ -10,7 +10,7 @@ public class Solution_JZ9 {
     }
 
     public int JumpFloorII(int target) {
-        // TODO 分析总结规律后得到的最简方法
+        // DONE 分析总结规律后得到的最简方法
         if (target <= 0) {
             return 0;
         }
@@ -18,7 +18,7 @@ public class Solution_JZ9 {
     }
 
     public int JumpFloorII2(int target) {
-        // TODO 思考是否有优化空间复杂度的解决方法
+        // DONE 思考是否有优化空间复杂度的解决方法
         if (target <= 0) {
             return 0;
         }

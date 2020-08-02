@@ -34,7 +34,7 @@ public class Solution_JZ35 {
             System.arraycopy(array, leftIndex, backup, leftIndex, rightIndex + 1 - leftIndex);
         }
 
-        // TODO 这里归并的过程需要重写
+        // DONE 这里归并的过程需要重写
         int l = leftIndex;
         int r = midIndex + 1;
         int i = leftIndex;
