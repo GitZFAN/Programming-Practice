@@ -13,10 +13,13 @@ public class Solution679 {
     /**
      * 通过回溯的方法遍历所有不同的可能性
      * <p>
-     * TODO: 8/22/20 这里的解题方法是copy题解中的方法，需要理解并分析，然后容纳。
+     * TODO: 8/22/20 经典 回溯算法 + 集合元素排列组合，copy from 题解，值的参考
      */
 
     static final int TARGET = 24;
+    /**
+     * 因为浮点数的特性，需要设置精度，以判断两数“相等”
+     */
     static final double EPSILON = 1e-6;
     static final int ADD = 0, MULTIPLY = 1, SUBTRACT = 2, DIVIDE = 3;
 
@@ -53,8 +56,10 @@ public class Solution679 {
 
                     for (int k = 0; k < 4; k++) {
                         if (k < 2 && i > j) {
+                            // 取出的元素 i,j 计算得到的结果相同，所以可以减去该分支
                             continue;
                         }
+
                         if (k == ADD) {
                             list2.add(list.get(i) + list.get(j));
                         } else if (k == MULTIPLY) {
@@ -68,9 +73,12 @@ public class Solution679 {
                                 list2.add(list.get(i) / list.get(j));
                             }
                         }
+
+                        // 递归解决
                         if (solve(list2)) {
                             return true;
                         }
+                        // 回溯
                         list2.remove(list2.size() - 1);
                     }
                 }
