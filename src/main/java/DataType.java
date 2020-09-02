@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * 基本数据类型相关问题
  *
@@ -24,6 +26,7 @@ public class DataType {
     public static void main(String[] args) {
         DataType dataType = new DataType();
 
+        // 基本数据类型初始化
         System.out.println("dataType.abyte = " + dataType.abyte);
         System.out.println("dataType.ashort = " + dataType.ashort);
         System.out.println("dataType.anint = " + dataType.anint);
@@ -36,6 +39,30 @@ public class DataType {
 
         System.out.println("dataType.aboolean = " + dataType.aboolean);
 
+        // 表达式类型赋值
+        int a = 1, b = 2;
+        boolean expr = (a < b);
+        System.out.println("'" + a + "<" + b + "' = " + expr);
+        System.out.println();
+
+        // 数组类型初始化
+        int[] ints0 = new int[3];
+        int[] ints1 = {2, 4, 6};
+        int[] ints = new int[]{1, 3, 5};
+        System.out.println("ints = " + Arrays.toString(ints));
+        System.out.println("ints0 = " + Arrays.toString(ints0));
+        System.out.println("ints1 = " + Arrays.toString(ints1));
+
+        System.out.println();
+        System.out.println("经典字符顺序");
+        for (char i = '0'; i < 'z' + 1; i++) {
+            System.out.print(i + " ");
+            if (i % 32 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("\n");
+
         // 体会异常的概念和处理
         try {
             // 这里体会 整数除法 和 实数除法 的区别
@@ -47,8 +74,5 @@ public class DataType {
             exception.printStackTrace();
         }
 
-        for (int i = 10; i > 0; i--) {
-            System.out.println("item: " + i);
-        }
     }
 }
