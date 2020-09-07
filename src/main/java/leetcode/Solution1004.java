@@ -21,25 +21,34 @@ public class Solution1004 {
         System.out.println("longestOnes = " + longestOnes);
     }
 
-    public int longestOnes(int[] A, int K) {
+    /**
+     * 滑动窗口的常规解法
+     *
+     * @param arr 由若干 0 和 1 组成的数组
+     * @param K   最多可以将 K 个值从 0 变成 1
+     * @return 仅包含 1 的最长（连续）子数组的长度
+     */
+    public int longestOnes(int[] arr, int K) {
         int left = 0, right = 0;
+        // count用来统计窗口中0的个数
         int count = 0;
         int result = Integer.MIN_VALUE;
 
-        while (right < A.length) {
-            if (A[right] == 0) {
+        while (right < arr.length) {
+            if (arr[right] == 0) {
                 count += 1;
             }
             if (count > K) {
-                // 0 的个数超过K，将 left 移动到第一个0后面位置
+                // 当窗口内 0 的个数超过K，将 left 移动到第一个0后面位置
                 for (int i = left; i <= right; i++) {
-                    if (A[i] == 0) {
+                    if (arr[i] == 0) {
                         left = i + 1;
                         count -= 1;
                         break;
                     }
                 }
             }
+            // 窗口内0的个数小于等于k时，也就是可以该窗口内的0都可以替换，根据该窗口长度来确定是否更新result
             result = Math.max(result, right - left + 1);
             right += 1;
         }

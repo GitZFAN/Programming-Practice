@@ -7,7 +7,7 @@ import java.math.BigInteger;
  * @author fzhang
  * @date 2020-09-02
  */
-public class BigNummber {
+public class BigNumber {
     public static void main(String[] args) {
         // 注意 不可变类 类似 String
         BigInteger bigInteger = new BigInteger("0");

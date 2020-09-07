@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 47. 全排列 II
+ * 给定一个可包含重复数字的序列，返回所有不重复的全排列。
  *
  * @author fzhang
  * @date 02/08/2020
@@ -16,6 +17,12 @@ public class Solution47 {
     int[] numbers;
     LinkedList<List<Integer>> result = new LinkedList<>();
 
+    /**
+     * 给定一个可包含重复数字的序列，返回所有不重复的全排列。
+     *
+     * @param nums 可包含重复数字的序列
+     * @return 所有不重复的全排列
+     */
     public List<List<Integer>> permuteUnique(int[] nums) {
         numbers = nums;
 
@@ -23,6 +30,7 @@ public class Solution47 {
             return null;
         }
 
+        // 从第一个元素开始排
         permuteFromIndex(0);
 
         return result;
@@ -38,6 +46,7 @@ public class Solution47 {
             return;
         }
 
+        // 使用 HashSet 避免重复
         HashSet<Integer> hashSet = new HashSet<>();
         // 对当前下标至末尾的所有数组元素进行排列
         for (int i = index; i < numbers.length; i++) {
