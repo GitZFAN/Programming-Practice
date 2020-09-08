@@ -1,5 +1,6 @@
 package leetcode;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,8 +13,16 @@ import java.util.List;
 public class Solution1004 {
     public static void main(String[] args) {
         Solution1004 solution1004 = new Solution1004();
-        String str = "abbcccddddeeeee";
+        String str = "addddbbccceeeee";
         List<CharAndCount> list = solution1004.decompositionString(str);
+        System.out.println("list = " + list);
+        list.sort(new Comparator<CharAndCount>() {
+            @Override
+            public int compare(CharAndCount o1, CharAndCount o2) {
+                // 根据 char 出现的频率进行 倒序 排列
+                return o2.count - o1.count;
+            }
+        });
         System.out.println("list = " + list);
 
         int[] ints = {0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1};
@@ -56,11 +65,14 @@ public class Solution1004 {
         return result;
     }
 
-    private List<CharAndCount> decompositionString(String str) {
+    public List<CharAndCount> decompositionString(String str) {
         if (str == null || str.length() == 0) {
             return null;
         }
 
+        // DONE: 2020/9/8 思考：这里为什么需要构造 CharAndCount 类来记录 片段数据
+        //  而不是直接使用HashMap结构？
+        //  因为：输入str 中 可能存在 char 相同的 片段，HashMap无法保存key相同value不同的片段
         List<CharAndCount> list = new LinkedList<>();
         if (str.length() == 1) {
             CharAndCount charAndCount = new CharAndCount(str.charAt(0), 1);
