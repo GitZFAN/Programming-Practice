@@ -1,5 +1,7 @@
 package nowcode.bilibili;
 
+import leetcode.Solution54;
+
 import java.util.Arrays;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Arrays;
  *
  * @author 13585
  * @date 2020-09-04
+ * @see Solution54
  */
 public class Solution2 {
     public static void main(String[] args) {

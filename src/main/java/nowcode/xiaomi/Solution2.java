@@ -1,5 +1,7 @@
 package nowcode.xiaomi;
 
+import leetcode.Solution79;
+
 import java.util.Scanner;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Scanner;
  *
  * @author 13585
  * @date 2020-09-08
+ * @see Solution79
  */
 public class Solution2 {
     static char[][] chars;
@@ -57,6 +60,15 @@ public class Solution2 {
         return false;
     }
 
+    /**
+     * 矩阵 深度优先 搜索
+     *
+     * @param word   匹配的元素集合
+     * @param index0 矩阵第一维下标
+     * @param index1 矩阵第二维下标
+     * @param start  集合开始匹配下标
+     * @return 是否存在完全匹配
+     */
     private static boolean dfs(String word, int index0, int index1, int start) {
         if (start == word.length() - 1) {
             return chars[index0][index1] == word.charAt(start);
