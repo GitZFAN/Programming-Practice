@@ -27,7 +27,7 @@ public class Solution34 {
         return ints;
     }
 
-    private int rightBound(int[] nums, int target) {
+    public int rightBound(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return -1;
         }
@@ -60,7 +60,7 @@ public class Solution34 {
         }
     }
 
-    private int leftBound(int[] nums, int target) {
+    public int leftBound(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return -1;
         }

@@ -5,7 +5,7 @@ package leetcode;
  *
  * @author 13585
  * @date 2020-09-16
- * @see Solution34 二分查找进阶
+ * @see Solution34 二分边界查找
  */
 public class Solution704 {
 
