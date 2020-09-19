@@ -1,3 +1,5 @@
+package mytool;
+
 import java.util.*;
 
 /**
@@ -50,7 +52,8 @@ public class MapSortTest {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
                 // 按 value 进行 降序 排列
-                return o2.getValue() - o1.getValue();
+                // 注意：不要直接使用 o2.getValue() - o2.getValue()，存在溢出问题
+                return o2.getValue().compareTo(o1.getValue());
             }
         });
         return entryArrayList;

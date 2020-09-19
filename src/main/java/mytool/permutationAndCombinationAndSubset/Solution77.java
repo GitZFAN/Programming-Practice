@@ -1,4 +1,4 @@
-package leetcode;
+package mytool.permutationAndCombinationAndSubset;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.List;
 public class Solution77 {
     public static void main(String[] args) {
         Solution77 solution77 = new Solution77();
+        // TODO: 9/19/20 考虑k个数的排列呢？
         List<List<Integer>> lists = solution77.combine(4, 2);
         System.out.println("lists = " + lists);
     }

@@ -1,3 +1,5 @@
+package mytool;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 

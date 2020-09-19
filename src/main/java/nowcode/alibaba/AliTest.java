@@ -1,5 +1,13 @@
+package nowcode.alibaba;
+
 import java.util.Scanner;
 
+
+/**
+ * 吃饼
+ *
+ * @author fzhang
+ */
 public class AliTest {
     public static void main(String[] args) {
         System.out.println(Integer.MAX_VALUE);

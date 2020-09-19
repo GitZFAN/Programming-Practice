@@ -1,4 +1,4 @@
-package leetcode;
+package mytool.permutationAndCombinationAndSubset;
 
 import java.util.LinkedList;
 
