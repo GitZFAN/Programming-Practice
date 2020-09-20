@@ -60,6 +60,13 @@ public class Solution47 {
         }
     }
 
+    /**
+     * 通过 交换，实现 <b>记录已经访问的路径，并且划分 已访问 和 未访问 的元素集合</b>
+     * 减少时间和空间代价
+     *
+     * @param index 进行交换的第一个元素 索引
+     * @param i     进行交换的第二个元素 索引
+     */
     private void swap(int index, int i) {
         int number = numbers[index];
         numbers[index] = numbers[i];

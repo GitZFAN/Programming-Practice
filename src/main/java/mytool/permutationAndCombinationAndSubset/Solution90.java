@@ -26,6 +26,8 @@ public class Solution90 {
      * 给定一个<b>可能包含重复元素</b>的整数数组 nums，返回该数组所有可能的子集（幂集）。
      * <p>
      * 说明：解集不能包含重复的子集。
+     * <p>
+     * 必须对 nums[] 进行排序，实现数组中相同元素放在一起，然后通过变化 相同元素的个数 实现不同组合情况
      *
      * @param nums 一个<b>可能包含重复元素</b>的整数数组
      * @return 该数组所有可能的子集（幂集）
@@ -47,6 +49,15 @@ public class Solution90 {
         return result;
     }
 
+    /**
+     * 深度优先搜索
+     *
+     * @param result     记录所有子集的结果列表
+     * @param nums       所有选择列表
+     * @param startIndex 当前选择起始点，注意：这里结合已经排序的 nums 一起构成了组合的无序且不重复特性
+     *                   因为 nums[0, startIndex) 区间的所有元素都被排除出搜索区间（剩余元素集合）
+     * @param path       路径
+     */
     private void dfs(LinkedList<List<Integer>> result, int[] nums, int startIndex, LinkedList<Integer> path) {
         // 因为本问题求的是树上的所有节点；
         // 所以，没有终止条件，即 startIndex 达到 nums.length 自然终止
