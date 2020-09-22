@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 /**
  * 84. 柱状图中最大的矩形
+ * <p>
+ * 找左右两边第一个比自己小的元素
  *
  * @author fzhang
  * @date 2020-09-22
@@ -13,7 +15,7 @@ public class Solution84 {
     public static void main(String[] args) {
         int[] ints = {2, 1, 5, 6, 2, 3};
         Solution84 solution84 = new Solution84();
-        int area = solution84.largestRectangleArea(ints);
+        int area = solution84.largestRectangleArea1(ints);
         System.out.println("area = " + area);
     }
 
@@ -26,6 +28,34 @@ public class Solution84 {
      * @return 柱状图中最大的矩形面积
      */
     public int largestRectangleArea(int[] heights) {
+        if (heights == null || heights.length == 0) {
+            return 0;
+        }
+
+        // 单调（非严格）递增栈
+        LinkedList<Integer> deque = new LinkedList<>();
+        int length = heights.length;
+
+        int maxSquare = Integer.MIN_VALUE;
+
+        // 添加左边哨兵
+        deque.offerLast(-1);
+        // 添加右边哨兵（注意：i = heights.length）
+        for (int i = 0; i <= length; i++) {
+            while (getHeight(heights, deque.peekLast()) > getHeight(heights, i)) {
+                Integer pollLast = deque.pollLast();
+                int height = getHeight(heights, pollLast);
+                Integer left = deque.peekLast();
+                int width = i - left - 1;
+                int square = height * width;
+                maxSquare = Math.max(maxSquare, square);
+            }
+            deque.offerLast(i);
+        }
+        return maxSquare;
+    }
+
+    public int largestRectangleArea1(int[] heights) {
         if (heights == null || heights.length == 0) {
             return 0;
         }
