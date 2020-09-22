@@ -10,11 +10,15 @@ public class Solution459 {
     public static void main(String[] args) {
         String s = "abab";
         Solution459 solution459 = new Solution459();
-        boolean repeatedSubstringPattern = solution459.repeatedSubstringPattern(s);
+        boolean repeatedSubstringPattern = solution459.repeatedSubstringPattern1(s);
         System.out.println("repeatedSubstringPattern = " + repeatedSubstringPattern);
     }
 
     public boolean repeatedSubstringPattern(String s) {
+        return (s + s).indexOf(s, 1) != s.length();
+    }
+
+    public boolean repeatedSubstringPattern1(String s) {
         if (s == null || s.length() == 0) {
             return false;
         }
