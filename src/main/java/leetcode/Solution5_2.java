@@ -1,6 +1,8 @@
 package leetcode;
 
 /**
+ * 5. 最长回文子串
+ * <p>
  * 解法2：中心扩展法
  *
  * @author TheFan
@@ -8,7 +10,7 @@ package leetcode;
 public class Solution5_2 {
     public static void main(String[] args) {
         Solution5_2 solution5_2 = new Solution5_2();
-        String s = "cbbd";
+        String s = "cbbdbdbd";
         System.out.println(solution5_2.longestPalindrome(s));
     }
 
@@ -23,11 +25,11 @@ public class Solution5_2 {
 
         for (int i = 0; i < chars.length; i++) {
             maxSingleCentrePalindrome(chars, i);
-            if (i+1 < chars.length) {
-                maxDoubleCentrePalindrome(chars, i, i+1);
+            if (i + 1 < chars.length) {
+                maxDoubleCentrePalindrome(chars, i, i + 1);
             }
         }
-        return s.substring(begin, begin+maxLength);
+        return s.substring(begin, begin + maxLength);
     }
 
     private void maxDoubleCentrePalindrome(char[] chars, int c, int c1) {
@@ -37,43 +39,40 @@ public class Solution5_2 {
             maxLength = 2;
             begin = c;
         }
-        int maxHalfLen = Math.min(c, chars.length-1 - c1);
-        /**
-         * 判断是否有超过maxLength的回文子串的可能性
-         */
-        if ((maxHalfLen*2 + 2) <= maxLength){
+
+        int maxHalfLen = Math.min(c, chars.length - 1 - c1);
+        // 判断是否有超过maxLength的回文子串的可能性
+        if ((maxHalfLen * 2 + 2) <= maxLength) {
             return;
         }
 
-        for (int i = 1; c-i >= 0 && c1+i < chars.length; i++) {
-            if (chars[c-i] != chars[c1+i]) {
+        for (int i = 1; c - i >= 0 && c1 + i < chars.length; i++) {
+            if (chars[c - i] != chars[c1 + i]) {
                 break;
             }
-            int length = i*2 + 2;
+            int length = i * 2 + 2;
             if (length > maxLength) {
                 maxLength = length;
-                begin = c-i;
+                begin = c - i;
             }
         }
     }
 
     private void maxSingleCentrePalindrome(char[] chars, int c) {
         int maxHalfLen = Math.min(c, chars.length - 1 - c);
-        /**
-         * 判断是否有超过maxLength的回文子串的可能性
-         */
-        if ((maxHalfLen*2 + 1) <= maxLength) {
+        // 判断是否有超过maxLength的回文子串的可能性
+        if ((maxHalfLen * 2 + 1) <= maxLength) {
             return;
         }
 
-        for (int i = 1; c-i >= 0 && c+i < chars.length; i++) {
-            if (chars[c-i] != chars[c+i]) {
+        for (int i = 1; c - i >= 0 && c + i < chars.length; i++) {
+            if (chars[c - i] != chars[c + i]) {
                 break;
             }
-            int length = i*2 + 1;
+            int length = i * 2 + 1;
             if (length > maxLength) {
                 maxLength = length;
-                begin = c-i;
+                begin = c - i;
             }
         }
     }

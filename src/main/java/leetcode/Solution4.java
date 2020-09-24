@@ -2,13 +2,24 @@ package leetcode;
 
 /**
  * 4. 寻找两个正序数组的中位数
- *
- * <p>请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))</p>
+ * <p>
+ * 请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))
  *
  * @author fzhang
  * @date 2020-08-11
  */
 public class Solution4 {
+    /**
+     * 给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。
+     * <p>
+     * 请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
+     * <p>
+     * 你可以假设 nums1 和 nums2 不会同时为空。
+     *
+     * @param nums1 升序数组1
+     * @param nums2 升序数组2
+     * @return 两个正序数组的中位数
+     */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int length1 = nums1.length;
         int length2 = nums2.length;
@@ -23,6 +34,18 @@ public class Solution4 {
         return (kthLeft + kthRight) / 2.0;
     }
 
+    /**
+     * 找到两个数组所有数字中第 k 大的元素
+     *
+     * @param nums1  正序数组1
+     * @param start1 左端索引
+     * @param end1   右端索引
+     * @param nums2  正序数组2
+     * @param start2 左端索引
+     * @param end2   右端索引
+     * @param k      第 k 大
+     * @return 第 k 大的元素值
+     */
     private int findKth(int[] nums1, int start1, int end1, int[] nums2, int start2, int end2, int k) {
         int len1 = end1 - start1 + 1;
         int len2 = end2 - start2 + 1;

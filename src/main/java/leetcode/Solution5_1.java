@@ -1,6 +1,8 @@
 package leetcode;
 
 /**
+ * 5. 最长回文子串
+ * <p>
  * 解法1：动态规划
  *
  * @author TheFan
@@ -14,7 +16,7 @@ public class Solution5_1 {
     }
 
     public String longestPalindrome(String s) {
-        if ("".equals(s)) {
+        if (s == null || s.length() == 0) {
             return "";
         }
         char[] chars = s.toCharArray();
@@ -28,16 +30,16 @@ public class Solution5_1 {
                     ints[i][i] = 1;
                 } else if (len == 1) {
                     if (chars[i] == chars[i + 1]) {
-                        ints[i][i+1] = 1;
-                        if ((len+1) > maxLength) {
+                        ints[i][i + 1] = 1;
+                        if ((len + 1) > maxLength) {
                             maxLength = len + 1;
                             begin = i;
                         }
                     }
                 } else {
-                    if ((chars[i] == chars[i+len]) && ints[i+1][i+len-1] != 0) {
-                        ints[i][i+len] = 1;
-                        if ((len+1) > maxLength) {
+                    if ((chars[i] == chars[i + len]) && ints[i + 1][i + len - 1] != 0) {
+                        ints[i][i + len] = 1;
+                        if ((len + 1) > maxLength) {
                             maxLength = len + 1;
                             begin = i;
                         }
@@ -45,6 +47,6 @@ public class Solution5_1 {
                 }
             }
         }
-        return s.substring(begin, begin+maxLength);
+        return s.substring(begin, begin + maxLength);
     }
 }
