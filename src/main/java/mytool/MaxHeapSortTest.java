@@ -40,6 +40,10 @@ public class MaxHeapSortTest {
      * <p>
      * 1. 完全二叉树数组形式结构
      * 2. 根节点 >= 所有子节点
+     * <p>
+     * TODO 这里使用的方式是 maxHeapify() ，思考：为什么不使用 插入 的方法建堆？
+     * （即：反复调用 {@link MaxPriorityQueue#insert(int)}）
+     * 猜想：这里的时间复杂度是O(n)，而插入方法最坏情况下的复杂度是O(nlogn)
      *
      * @param nums 无序数组
      */

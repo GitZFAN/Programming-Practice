@@ -30,7 +30,7 @@ public class Solution215 {
         int right = nums.length - 1;
 
         while (left <= right) {
-            int p = randomPartition(nums, left, right);
+            int p = randomizedPartition(nums, left, right);
             if (p < kthIndex) {
                 left = p + 1;
             } else if (p > kthIndex) {
@@ -53,9 +53,9 @@ public class Solution215 {
      * @param left  起始索引
      * @param right 终止索引
      * @return 选取的 主元(一般：nums[right]) 的排序后索引
-     * @see mytool.QuickSortTest#randomPartition(int[], int, int)
+     * @see mytool.QuickSortTest#randomizedPartition(int[], int, int)
      */
-    private int randomPartition(int[] nums, int left, int right) {
+    private int randomizedPartition(int[] nums, int left, int right) {
         int length = right - left + 1;
         // 范围：[0.0, 1.0)
         double rdm = Math.random();

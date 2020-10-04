@@ -66,7 +66,8 @@ public class MaxPriorityQueue {
 
         int parent = parent(index);
         while (index > 0 && nums[parent] < nums[index]) {
-            maxHeapify(heapSize, parent);
+            // maxHeapify(heapSize, parent);    // 也行
+            swap(parent, index);
             index = parent;
             parent = parent(index);
         }
@@ -116,7 +117,7 @@ public class MaxPriorityQueue {
         }
     }
 
-    public void swap(int index1, int index2) {
+    private void swap(int index1, int index2) {
         int temp = nums[index1];
         nums[index1] = nums[index2];
         nums[index2] = temp;
@@ -130,7 +131,7 @@ public class MaxPriorityQueue {
      * @param index 当前节点索引
      * @return index父节点索引
      */
-    public int parent(int index) {
+    private int parent(int index) {
         return (index - 1) / 2;
     }
 
@@ -140,7 +141,7 @@ public class MaxPriorityQueue {
      * @param index 当前节点索引
      * @return index左子节点索引
      */
-    public int left(int index) {
+    private int left(int index) {
         return 2 * index + 1;
     }
 
@@ -150,7 +151,7 @@ public class MaxPriorityQueue {
      * @param index 当前节点索引
      * @return index右子节点索引
      */
-    public int right(int index) {
+    private int right(int index) {
         return 2 * (index + 1);
     }
 }

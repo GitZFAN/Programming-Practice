@@ -31,7 +31,7 @@ public class QuickSortTest {
      */
     public void quickSort(int[] nums, int left, int right) {
         if (left < right) {
-            int mid = randomPartition(nums, left, right);
+            int mid = randomizedPartition(nums, left, right);
             quickSort(nums, left, mid - 1);
             quickSort(nums, mid + 1, right);
         }
@@ -47,7 +47,7 @@ public class QuickSortTest {
      * @param right 终止索引
      * @return 选取的 主元(一般：nums[right]) 的排序后索引
      */
-    public int randomPartition(int[] nums, int left, int right) {
+    public int randomizedPartition(int[] nums, int left, int right) {
         int length = right - left + 1;
         // 范围：[0.0, 1.0)
         double rdm = Math.random();
