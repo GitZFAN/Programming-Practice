@@ -33,6 +33,8 @@ public class Solution53 {
 
     /**
      * 整型数组 nums [left, right] 中最大连续子数组的和
+     * <p>
+     * 分治思想
      *
      * @param nums  整型数组
      * @param left  起始索引
