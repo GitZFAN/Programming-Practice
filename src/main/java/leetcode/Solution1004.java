@@ -32,16 +32,49 @@ public class Solution1004 {
 
     /**
      * 滑动窗口的常规解法
+     * <p>
+     * 与 {@link Solution424#characterReplacement(String, int)} 一样的套路，不过更为简单一点。
      *
      * @param arr 由若干 0 和 1 组成的数组
      * @param K   最多可以将 K 个值从 0 变成 1
      * @return 仅包含 1 的最长（连续）子数组的长度
      */
     public int longestOnes(int[] arr, int K) {
+        int left = 0;
+        // 表示 滑动窗口中 1 的最大数量
+        int maxCount1 = 0;
+        for (int right = 0; right < arr.length; right++) {
+            if (arr[right] == 1) {
+                maxCount1 += 1;
+            }
+            // 窗口默认一直向右扩展
+            if ((right - left + 1) > (maxCount1 + K)) {
+                // 但是 当窗口大小 超过 当前容纳最大1的数量+K 时候（即窗口中容纳的0的数量超过K），
+                // 窗口需要缩小，也即向右滑动，而不是扩展
+                if (arr[left] == 1) {
+                    maxCount1 -= 1;
+                }
+                left += 1;
+            }
+        }
+
+        return arr.length - left;
+    }
+
+    /**
+     * 滑动窗口的简单方法
+     * <p>
+     * 直接用count统计窗口内的0的个数
+     *
+     * @param arr 由若干 0 和 1 组成的数组
+     * @param K   最多可以将 K 个值从 0 变成 1
+     * @return 仅包含 1 的最长（连续）子数组的长度
+     */
+    public int longestOnes1(int[] arr, int K) {
         int left = 0, right = 0;
         // count用来统计窗口中0的个数
         int count = 0;
-        int result = Integer.MIN_VALUE;
+        int result = 0;
 
         while (right < arr.length) {
             if (arr[right] == 0) {
