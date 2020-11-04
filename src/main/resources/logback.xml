@@ -1,23 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    scan: 表示如果配置文件更改，是否自动扫描加载，默认值是true。
+    scanPeriod: 表示自动扫描加载的时间间隔，默认是60 seconds，时间间隔的单位可以是milliseconds、seconds、minutes 或者 hours，默认是milliseconds。
+    debug: 是否打印logback自身的日志，默认false。
+-->
 <configuration scan="true" scanPeriod="30 seconds" debug="false">
+
+    <!--
+        file: 用于指定配置文件的路径，他的作用在于，如果你有多个配置信息的话，可以直接写在配置文件中，然后通过file引入
+            <property file="src/main/java/chapters/configuration/variables.properties" />
+
+        resource: 作用和file一样，但是，它是可以直接从classpath路径下引入配置文件
+            <property resource="resource.properties" />
+    -->
     <property name="LOG_HOME" value="logs/userlogs"/>
+
+    <!--
+    appender是具体负责写日志的组件，由logger输出的信息都将由appender处理，然后写到具体的日志里。
+        name: name是appender的标识，也是<appender-ref ref="appender-name"/>中的引用值。
+        class: 是使用appender类型的全限定名，就是使用何种方式进行日志的输出。常用的appender有ConsoleAppender和RollingFileAppender。
+    -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36}: %msg%n
+                %d{ISO8601} %-5level [%thread] %logger{36}: %msg%n
             </Pattern>
         </layout>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--
+        rollingPolicy: 决定日志滚动行为，一般用于日志切割。例如: SizeAndTimeBasedRollingPolicy、TimeBasedRollingPolicy
+            fileNamePattern: 必要的节点，一般用于指定日志的文件的路径以及生成格式。
+            maxFileSize: 单个日志文件最大值，达到之后就进行切割。
+            maxHistory: 日志文件最多保留的天数，也就是过期时间。
+            totalSizeCap: 日志文件总体的最大值，达到之后就不再产生日志。
+        -->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_HOME}/mylog-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/mylog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
             <maxHistory>31</maxHistory>
             <totalSizeCap>10GB</totalSizeCap>
         </rollingPolicy>
+        <!--
+        layout和Pattern 这两个一般是一起使用的。
+            layout: 格式化日志信息;
+            Pattern: layout 子节点，定义输出信息的格式;
+        -->
         <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--
+            具体PatternLayout信息可以参考:
+                https://logback.qos.ch/manual/layouts.html
+
+            例如：日期格式
+                Conversion Pattern	            Result
+                %d	                            2006-10-20 14:06:49,812
+                %date	                        2006-10-20 14:06:49,812
+                %date{ISO8601}	                2006-10-20 14:06:49,812
+                %date{HH:mm:ss.SSS}	            14:06:49.812
+                %date{dd MMM yyyy;HH:mm:ss.SSS}	20 oct. 2006;14:06:49.812
+            -->
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36}: %msg%n
+                %d{ISO8601} %-5level [%thread] %logger{36}: %msg%n
             </Pattern>
         </layout>
     </appender>
@@ -25,7 +68,7 @@
     <appender name="ONE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${LOG_HOME}/oneInfo/%d{yyyy-MM-dd}/oneInfo.%i.txt</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/oneInfo/%d{yyyy-MM-dd}/oneInfo.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
             <maxHistory>31</maxHistory>
             <totalSizeCap>10GB</totalSizeCap>
@@ -40,7 +83,7 @@
     <appender name="TWO_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${LOG_HOME}/twoInfo/%d{yyyy-MM-dd}/twoInfo.%i.txt</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/twoInfo/%d{yyyy-MM-dd}/twoInfo.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
             <maxHistory>31</maxHistory>
             <totalSizeCap>10GB</totalSizeCap>
@@ -52,6 +95,21 @@
         </layout>
     </appender>
 
+    <!--
+    logger节点，可选节点，用来具体指明包的日志输出级别
+        name: 必选，你必须为每一个logger指定一个名称，通常name是类的全限定名或包名。
+        level: 可选，表示这个logger的日志级别，如果不指定将继承父级logger的级别，如果父级logger也没指定，则继续向父级继承，直到root节点。
+            例如：<logger name="org.schhx"/>是<logger name="org.schhx.springbootlearn"/>父级
+        additivity: 可选，表示是否向父级loger传递打印信息，默认是true。
+            false：表示只用当前logger的appender-ref。
+            true：表示当前logger的appender-ref和rootLogger的appender-ref都有效。
+
+    <logger>节点包含零个或多个<appender-ref>，表示logger的信息由绑定的appender打印。
+    logger的信息根据additivity决定是否向父级传递，直到root，本级以及所有绑定了appender的父级都将打印本级的日志。
+
+    注意：一般情况下，我们都是对logger只配置name和level，addtivity使用默认值true，
+        不绑定appender，使打印信息传递到root，在root绑定appender，统一在root打印日志。
+    -->
     <logger name="oneInfo" level="DEBUG" additivity="false">
         <appender-ref ref="ONE_INFO"/>
     </logger>
@@ -59,6 +117,13 @@
         <appender-ref ref="TWO_INFO"/>
     </logger>
 
+    <!--
+    root节点，必选节点，用来指定最基础的日志输出级别
+    root其实就是一个特殊的logger，它是所有logger的祖先，它只有一个可配置的属性，就是level
+        level: 日志输出的级别,如果不配置的话，表示所有级别都可以打印
+
+    root可以配置零个或多个appender，建议为root至少配置一个appender
+    -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
