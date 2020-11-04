@@ -14,6 +14,13 @@ public class Solution336 {
 
     String[] strings;
 
+    /**
+     * 给定一组 互不相同 的单词， 找出所有不同 的索引对(i, j)，
+     * 使得列表中的两个单词， words[i] + words[j] ，可拼接成回文串。
+     *
+     * @param words 一组 互不相同 的单词
+     * @return 所有不同的索引对
+     */
     public List<List<Integer>> palindromePairs(String[] words) {
         this.strings = words;
         List<List<Integer>> result = new LinkedList<>();
@@ -30,7 +37,8 @@ public class Solution336 {
     }
 
     /**
-     * 遍历所有可能组合，判断每种组合是否产生回文
+     * 遍历所有可能组合，判断每种组合是否产生回文字符串
+     * <p>
      * 时间复杂度 O(n^2)，会超时
      *
      * @param index1 第一个元素下标
