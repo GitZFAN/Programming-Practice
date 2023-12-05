@@ -12,7 +12,7 @@
         <!--日志框架用法1：slf4j + logback 模式
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <logback-classic.version>1.2.3</logback-classic.version>
-        <logback-core.version>1.2.3</logback-core.version>
+        <logback-core.version>1.2.13</logback-core.version>
         -->
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <logback-classic.version>1.2.3</logback-classic.version>
